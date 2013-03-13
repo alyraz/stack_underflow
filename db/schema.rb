@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(:version => 20130313173705) do
     t.string   "title",      :null => false
     t.text     "body",       :null => false
     t.integer  "user_id",    :null => false
-    t.integer  "winner_id",  :null => false
+    t.integer  "winner_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -39,5 +39,13 @@ ActiveRecord::Schema.define(:version => 20130313173705) do
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+
+  create_table "votes", :force => true do |t|
+    t.integer  "user_id",      :null => false
+    t.integer  "votable_id",   :null => false
+    t.string   "votable_type", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
 end
