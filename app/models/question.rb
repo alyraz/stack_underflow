@@ -1,4 +1,5 @@
 class Question < ActiveRecord::Base
+  attr_accessible :title, :body, :user_id
 
   validates :body, presence: true, length: {minimum: 20}
   validates :user_id, presence: true

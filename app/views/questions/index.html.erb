@@ -1,0 +1,18 @@
+<div id='questions-list'>
+  <h2> Questions </h2>
+  <ul> 
+    <% @questions.each do |question| %>
+      <li><%= question.title %></li>
+    <% end %>
+  </ul>
+</div>
+
+<% if current_user %>
+  <%= render '/layouts/question_form' %>
+<% else %>
+  <%= render '/layouts/signup_login' %>
+<% end %> 
+
+
+    
+  

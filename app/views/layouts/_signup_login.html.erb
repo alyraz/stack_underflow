@@ -1,0 +1,38 @@
+<h3> Sign Up </h3>
+<%= form_for(@user || User.new) do |f| %>
+  <div>
+    <%= f.label :username %>
+    <%= f.text_field :username, :placeholder => "username"%>
+  </div>
+
+  <div>
+    <%= f.label :email %>
+    <%= f.text_field :email, :placeholder => "email" %>
+  </div>
+
+  <div>
+    <%= f.label :password %>
+    <%= f.text_field :password, :placeholder => "password" %> 
+  </div>
+  <div>
+    <%= f.label :password_confirmation %>
+    <%= f.text_field :password_confirmation, :placeholder => "enter your password again" %>
+  </div>
+  <%= f.submit 'Signup' %>
+<% end %>
+
+<h3> Log In </h3>
+<%= form_tag sessions_path do %>
+
+  <div>
+    <%= label_tag :email %>
+    <%= text_field_tag :email, '', :placeholder => "email" %>
+  </div>
+
+  <div>
+    <%= label_tag :password %>
+    <%= text_field_tag :password, '', :placeholder => "password" %> 
+  </div>
+
+  <%= submit_tag 'Login' %>
+<% end %>

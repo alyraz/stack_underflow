@@ -22,4 +22,9 @@ class User < ActiveRecord::Base
 
   def upvote!(votable)
   end
+
+  # See: friendly_id gem
+  # def to_param
+  #   self.username
+  # end
 end
