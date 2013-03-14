@@ -1,2 +1,21 @@
-<%= @question.title %> 
-<%= @question.body %>
+<h3><%= @question.title %></h3>
+<div>
+  <%= @question.body %>
+</div>
+
+<div id='answers-list'>
+  <h3> Answers </h3>
+  <ul> 
+    <% @question.answers.each do |answer| %>
+      <li><%= answer.body %></li>
+    <% end %>
+  </ul>
+</div>
+
+<h4>Answer This Guy (or Gal)</h4>
+<%= form_for [@question, @question.answers.build] do |f| %> 
+  <div>
+    <%= f.text_area :body, :placeholder => "Enter your Answer here" %>
+  </div>
+  <%= f.submit "Submit" %>
+<% end %>

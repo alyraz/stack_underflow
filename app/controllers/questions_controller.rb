@@ -1,13 +1,11 @@
 class QuestionsController < ApplicationController
-  before_filter :load_questions
-
   def index
   end
 
   def create
     @question = Question.new params[:question]
     if @question.save
-      redirect_to @question
+      redirect_to question_path(@question)
     else 
       render 'index'
     end 
@@ -17,6 +15,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    @question = Question.find(params[:id])
   end
 
   def destroy

@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
       login(@user.id)
       redirect_to root_path
     else
-      render 'home'
+      render 'questions/index'
     end
   end
 
