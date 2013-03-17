@@ -10,9 +10,18 @@ FactoryGirl.define do
     title     "Question title"
     body      "Question body" * 5
     user
-    winner
   end
 
+  factory :question_with_winnerith_answers, :parent => :question do
+    after(:create) do |question|
+      3.times { create(:answer, :question => question) }
+    end
+  end
+
+  factory :question_with_winner, :parent => :question_with_answers do
+      winner { answers.sample }
+  end
+  
   factory :answer, :aliases => [:winner] do 
     body      "Answer body" * 5
     user
@@ -21,6 +30,6 @@ FactoryGirl.define do
 
   factory :vote do 
     user
-    votable { create(:question) }
+    votable { create([:question, :answer].sample) }
   end
 end

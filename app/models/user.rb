@@ -21,10 +21,23 @@ class User < ActiveRecord::Base
   has_many :votes
 
   def upvote!(votable)
+    vote!(votable, 1)    
   end
 
-  # See: friendly_id gem
+  def downvote!(votable)
+    vote!(votable, -1)    
+  end 
+
+  private 
+  def vote!(votable, value)
+    raise ArgumentError unless [Question, Answer].include? votable.class
+    self.votes.create(:votable => votable, :value => value)
+  end
+ 
+end
+
+
+ # See: friendly_id gem
   # def to_param
   #   self.username
   # end
-end

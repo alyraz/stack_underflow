@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
 
     if @user && @user.authenticate(params[:password])
       login(@user.id)
-      redirect_to root_path
+      redirect_to :back
     else
       render 'questions/index'
     end

@@ -4,4 +4,5 @@ class ApplicationController < ActionController::Base
 
   include ApplicationHelper
   include SessionHelper
+  include QuestionHelper
 end

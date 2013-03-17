@@ -8,8 +8,8 @@ gem 'rails', '3.2.11'
 gem 'sqlite3'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'jquery-rails'
-
 gem 'debugger'
+gem "font-awesome-rails"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -20,11 +20,11 @@ end
 
 group :development, :test do
   gem 'rspec-rails', '2.11.0'
+  gem 'factory_girl_rails'
 end
 
 group :test do
   gem 'faker'
-  gem 'factory_girl_rails'
   gem 'shoulda-matchers'
   gem 'capybara', '1.1.2'
   gem 'nyan-cat-formatter'

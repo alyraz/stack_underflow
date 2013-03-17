@@ -22,11 +22,50 @@ describe User do
     it { should have_many(:votes) }
   end
 
-  # context "#upvote!" do
-  #   it "adds a vote to the database" do
-  #     expect {
-  #       user.upvote!(question)
-  #     }.to change(Vote, :count).by(1)
-  #   end
-  # end
+  context "#upvote!" do
+    let(:user)      { FactoryGirl.create(:user) }
+    let(:question)  { FactoryGirl.create(:question) }
+    let(:answer)    { FactoryGirl.create(:answer) }
+
+    it "doesn't accept non-votables" do
+      expect { user.upvote!(user) }.to raise_error
+      expect { user.upvote!("pants") }.to raise_error
+    end 
+
+    it "upvoting a question adds a vote to the database" do
+      expect {
+        user.upvote!(question)
+      }.to change(Vote, :count).by(1)
+    end
+
+    it "upvoting an answer adds a vote to the database" do
+      expect {
+        user.upvote!(answer)
+      }.to change(Vote, :count).by(1)
+    end
+  end
+
+  context "#downvote!" do  
+    let(:user)      { FactoryGirl.create(:user) }
+    let(:question)  { FactoryGirl.create(:question) }
+    let(:answer)    { FactoryGirl.create(:answer) }
+    
+    it "doesn't accept non-votables" do 
+      expect { user.downvote!(user) }.to raise_error
+      expect { user.downvote!("pants") }.to raise_error
+    end 
+
+    it "upvoting a question adds a vote to the database" do
+      expect {
+        user.downvote!(question)
+      }.to change(Vote, :count).by(1)
+    end
+
+    it "upvoting an answer adds a vote to the database" do
+      expect {
+        user.downvote!(answer)
+      }.to change(Vote, :count).by(1)
+    end
+  end 
+
 end

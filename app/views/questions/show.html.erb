@@ -1,4 +1,12 @@
-<h3><%= @question.title %></h3>
+<h3>
+  <%= @question.title %>
+  <i class="question-upvote icon-stethoscope icon-2x" 
+     data-id="<%= @question.id %>"
+     data-action="upvote!"></i>
+  <i class="question-downvote icon-ambulance icon-2x"
+     data-id="<%= @question.id %>"></i>
+ <span class="score"><%= @question.aura_score %></span>
+</h3>
 <div>
   <%= @question.body %>
 </div>
@@ -7,15 +15,29 @@
   <h3> Answers </h3>
   <ul> 
     <% @question.answers.each do |answer| %>
-      <li><%= answer.body %></li>
+      <% if answer.persisted? %>
+        <li>
+          <%= answer.body %>
+          <i class="answer-upvote icon-stethoscope icon-2x"
+             data-id="<%= @question.id %>"></i>
+          <i class="answer-downvote icon-ambulance icon-2x"
+             data-id="<%= @question.id %>"></i>
+          <span class="score"><%= answer.aura_score %></span>
+        </li>
+      <% end %>
     <% end %>
   </ul>
 </div>
 
-<h4>Answer This Guy (or Gal)</h4>
-<%= form_for [@question, @question.answers.build] do |f| %> 
-  <div>
-    <%= f.text_area :body, :placeholder => "Enter your Answer here" %>
-  </div>
-  <%= f.submit "Submit" %>
+<% if current_user %>
+  <h4>Submit an Answer</h4>
+  <%= form_for [@question, @question.answers.build] do |f| %> 
+    <div>
+      <%= f.text_area :body, :placeholder => "Enter your Answer here" %>
+    </div>
+    <%= f.submit "Submit" %>
+  <% end %>
+<% else %>
+<h4>Login or Signup to Answer</h4>
+  <%= render 'layouts/signup_login' %>
 <% end %>

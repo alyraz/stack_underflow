@@ -8,6 +8,20 @@ class Question < ActiveRecord::Base
   has_many   :answers
   has_many   :votes, as: :votable
   belongs_to :user 
+  belongs_to :winner
+
+  def aura_score
+    # votes = q.votes
+    # score = 0
+    # votes.each do |vote|
+    #   score += vote.value 
+    # end 
+    # score 
+
+    Vote.where(:votable_id   => self.id, 
+               :votable_type => self.class).
+         sum(:value)
+  end
 
 
 end

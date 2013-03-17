@@ -12,6 +12,17 @@ class QuestionsController < ApplicationController
   end
 
   def update
+    @question = Question.find params[:id]
+    send("current_user_#{params[:action]}", @question)
+
+    @question.send(params[:action])
+
+    # if params[:value] == 1
+    #   current_user_upvote(@question)
+    # else
+    #   current_user_downvote(@question)
+    # end
+    render :json => { aura: @question.aura_score }
   end
 
   def show

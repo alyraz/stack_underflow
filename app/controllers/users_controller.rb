@@ -7,7 +7,7 @@ class UsersController < ApplicationController
       login(@user.id)
       redirect_to questions_path
     else
-      render 'home' 
+      render 'questions/index' 
     end
   end
 
